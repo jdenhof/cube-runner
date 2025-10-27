@@ -6,8 +6,8 @@
     "outDir": "./dist", // Output directory for compiled JavaScript
 
     // Environment Settings
-    "module": "nodenext", // Use Node.js module resolution (supports ES modules and CommonJS)
-    "moduleResolution": "nodenext", // Explicitly set to match "module" for Node.js compatibility
+    "module": "es2022", // Use Node.js module resolution (supports ES modules and CommonJS)
+    "moduleResolution": "classic", // Explicitly set to match "module" for Node.js compatibility
     "target": "esnext", // Compile to the latest ECMAScript features
     "lib": ["esnext", "dom"], // Include ESNext library for modern JavaScript features
     "types": ["node"], // Include Node.js type definitions (requires npm install -D @types/node)
@@ -22,7 +22,7 @@
     "exactOptionalPropertyTypes": true, // Enforce strict optional property types
 
     // Optional: Absolute Imports (for cleaner imports like 'utils/greet' instead of './utils/greet')
-    "baseUrl": "src", // Base directory for absolute imports
+    "baseUrl": "./src", // Base directory for absolute imports
     "paths": {
       "*": ["*"], // Allow all modules to be imported relative to src
     },

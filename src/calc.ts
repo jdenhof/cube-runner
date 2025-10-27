@@ -100,7 +100,8 @@ export function cross(v1: Vector3, v2: Vector3): Vector3 {
     return [(y1*z2) - (z1*y2), (z1*x2) - (x1*z2), (x1*y2) - (y1*x2)]
 }
 
-export function rotatePoint(point: Vector3, thetaX: number, thetaY: number): Vector3 {
+export function rotatePoint(point: Vector3, thetaX: number, thetaY: number, origin: Vector3 = [0, 0, 0]): Vector3 {
+
     let x = point[0] * Math.cos(thetaY) - point[2] * Math.sin(thetaY);
     let z = point[0] * Math.sin(thetaY) + point[2] * Math.cos(thetaY);
     let y = point[1] * Math.cos(thetaX) - z * Math.sin(thetaX);
@@ -109,14 +110,8 @@ export function rotatePoint(point: Vector3, thetaX: number, thetaY: number): Vec
 }
 
 export function project3D(point: Vector3): Vector2 {
-    // parseInt((document.getElementById('focal-length') as HTMLInputElement).value);
-    // (document.getElementById("value") as HTMLInputElement).value = focalLength.toString();
-    // const thetaX = (document.getElementById("theta-x") as HTMLInputElement).value;
-    // console.log(thetaX);
     const scale = focalLength / (focalLength + point[2]);
     const canvas = document.getElementById("canvas") as HTMLCanvasElement;
-    point = sub(point, [0, 0, 0])
-    point = rotatePoint(point, Math.PI/6, 0)
 
     return [
         point[0] * scale + canvas.width / 2,
