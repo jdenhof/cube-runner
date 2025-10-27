@@ -1,0 +1,39 @@
+{
+  // Visit https://aka.ms/tsconfig to read more about this file
+  "compilerOptions": {
+    // File Layout
+    "rootDir": "./src", // Source directory for TypeScript files
+    "outDir": "./dist", // Output directory for compiled JavaScript
+
+    // Environment Settings
+    "module": "nodenext", // Use Node.js module resolution (supports ES modules and CommonJS)
+    "moduleResolution": "nodenext", // Explicitly set to match "module" for Node.js compatibility
+    "target": "esnext", // Compile to the latest ECMAScript features
+    "lib": ["esnext", "dom"], // Include ESNext library for modern JavaScript features
+    "types": ["node"], // Include Node.js type definitions (requires npm install -D @types/node)
+
+    // Other Outputs
+    "sourceMap": true, // Generate source maps for debugging
+    "declaration": true, // Generate .d.ts declaration files
+    "declarationMap": true, // Generate source maps for declaration files
+
+    // Stricter Typechecking Options
+    "noUncheckedIndexedAccess": true, // Require explicit checks for indexed access
+    "exactOptionalPropertyTypes": true, // Enforce strict optional property types
+
+    // Optional: Absolute Imports (for cleaner imports like 'utils/greet' instead of './utils/greet')
+    "baseUrl": "src", // Base directory for absolute imports
+    "paths": {
+      "*": ["*"], // Allow all modules to be imported relative to src
+    },
+
+    // Recommended Options
+    "strict": true, // Enable all strict type-checking options
+    "jsx": "react-jsx", // Support React JSX syntax
+    // "verbatimModuleSyntax": true, // Enforce explicit import/export syntax
+    "isolatedModules": true, // Ensure compatibility with tools like esbuild or Vite
+    "noUncheckedSideEffectImports": true, // Prevent unchecked side-effect imports
+    "moduleDetection": "force", // Force module detection for all files
+    "skipLibCheck": true // Skip type-checking of declaration files for faster compilation
+  }
+}
