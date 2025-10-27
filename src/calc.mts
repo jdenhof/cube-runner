@@ -112,7 +112,7 @@ export function rotatePoint(point: Vector3, thetaX: number, thetaY: number, orig
 export function project3D(point: Vector3): Vector2 {
     const scale = focalLength / (focalLength + point[2]);
     const canvas = document.getElementById("canvas") as HTMLCanvasElement;
-
+    point = rotatePoint(point, Math.PI / 2, 0)
     return [
         point[0] * scale + canvas.width / 2,
         point[1] * scale + canvas.height / 2

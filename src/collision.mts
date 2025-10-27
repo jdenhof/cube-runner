@@ -1,17 +1,17 @@
-import { cross, dot, elementWiseMinMax, normalize, rowWiseMinMax, sub, Vector2, Vector3 } from "calc";
-import { GameObject } from "gameObject";
-import RenderEngine from "renderEngine";
+import { cross, dot, elementWiseMinMax, normalize, rowWiseMinMax, sub, Vector2, Vector3 } from "./calc.mjs";
+import { GameObject } from "./gameObject.mjs";
+import RenderEngine from "./renderEngine.mjs";
 
 export function doPolyhedraIntersect(obj1: GameObject, obj2: GameObject) {
     const obj1Vertices = RenderEngine.get(obj1.uuid).vertices;
-    const obj2Vertices = RenderEngine.get(obj1.uuid).vertices;
+    const obj2Vertices = RenderEngine.get(obj2.uuid).vertices;
     if (!aabbIntersect(obj1Vertices, obj2Vertices)) {
         return false;
     }
 
     const axes: Vector3[] = [];
     const polyRegistry1 = RenderEngine.polyRegistry.get(obj1.typeId);
-    const polyRegistry2 = RenderEngine.polyRegistry.get(obj1.typeId);
+    const polyRegistry2 = RenderEngine.polyRegistry.get(obj2.typeId);
     polyRegistry1.faces.forEach(
         face => axes.push(faceNormal(face, obj1Vertices)));
     polyRegistry2.faces.forEach(

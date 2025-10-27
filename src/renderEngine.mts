@@ -1,7 +1,7 @@
-import { add, rotatePoint, Vector3 } from "calc";
-import { GameObject } from "gameObject";
-import Registry from "registry";
-import PolyRegistryImpl, { PolyRegistry } from "polyRegistry";
+import { add, rotatePoint, Vector3 } from "./calc.mjs";
+import { GameObject } from "./gameObject.mjs";
+import Registry from "./registry.mjs";
+import PolyRegistryImpl, { PolyRegistry } from "./polyRegistry.mjs";
 
 interface RenderObject {
     typeId: string;
@@ -9,13 +9,13 @@ interface RenderObject {
     vertices: Vector3[];
 }
 
-class RenderEngine extends Registry<RenderObject> {
+class _RenderEngine extends Registry<RenderObject> {
     polyRegistry: PolyRegistry
     constructor(polyRegistry: PolyRegistry) {
         super();
         this.polyRegistry = polyRegistry;
     }
-    
+
     public getPolyhedronVertices(obj: GameObject): Vector3[] {
         const poly = this.polyRegistry.get(obj.typeId);
         return poly.getRelativeVertices(obj).map(vertex => {
@@ -34,12 +34,10 @@ class RenderEngine extends Registry<RenderObject> {
     }
 
     public render(...objs: GameObject[]) {
-        objs.forEach(this.renderObject);
+        objs.forEach(obj => this.renderObject(obj));
     }
 }
 
 
-
-
-const _RenderEngine: RenderEngine = new RenderEngine(PolyRegistryImpl);
-export default _RenderEngine;
+const RenderEngine: _RenderEngine = new _RenderEngine(PolyRegistryImpl);
+export default RenderEngine;

@@ -1,6 +1,6 @@
-import { Vector2, Vector3 } from "calc";
-import { Polyhedron } from "./poly";
-import { GameObject } from "gameObject";
+import { Vector2, Vector3 } from "../calc.mjs";
+import { Polyhedron } from "./poly.mjs";
+import { GameObject } from "../gameObject.mjs";
 
 export interface CubeImpl extends GameObject {
     length: number
@@ -39,7 +39,7 @@ export class Cube extends Polyhedron {
         length = 10,
         thetaX = 0,
         thetaY = 0
-    ): CubeImpl { 
+    ): CubeImpl {
         return {
             typeId: 'cube',
             position, thetaX, thetaY,

@@ -1,8 +1,11 @@
-import draw from 'draw';
-import GameState from 'gameState'
-import PolyRegistryImpl from 'polyRegistry';
-import RenderEngine from 'renderEngine';
-import update from 'update';
+import { Pyramid } from './polys/pyramid.mjs';
+import draw from './draw.mjs';
+import GameState from './gameState.mjs'
+import PolyRegistryImpl from './polyRegistry.mjs';
+import RenderEngine from './renderEngine.mjs';
+import update from './update.mjs';
+import { GameObject } from 'gameObject.mjs';
+import init_world from './world.mjs';
 
 document.addEventListener('keydown', function(event) {
     if (!GameState.player) return;
@@ -45,13 +48,15 @@ document.addEventListener('keyup', function(event) {
 });
 
 function spawnObject() {
+    const canvas = document.getElementById("canvas") as HTMLCanvasElement;
     const obj = PolyRegistryImpl.get('cube').create();
     obj.position[0] = Math.random()*(canvas.width*2+1) - canvas.width;
     GameState.objects.push(obj);
 };
 
 function gameLoop() {
-    RenderEngine.render();
+    const player = GameState.player === null ? [] : [GameState.player] as GameObject[];
+    RenderEngine.render(...[...player, ...GameState.objects])
     update();
     if (GameState.state.gameOver) {
         console.log("Game Over!!!");
@@ -61,11 +66,16 @@ function gameLoop() {
     window.requestAnimationFrame(gameLoop);
 }
 
-const canvas = document.getElementById("canvas") as HTMLCanvasElement;
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+function main() {
+    const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
+    GameState.player = (PolyRegistryImpl.get('pyramid') as Pyramid).create();
 
-setInterval(spawnObject, canvas.width / 10)
+    setInterval(spawnObject, canvas.width / 10);
 
-window.requestAnimationFrame(gameLoop);
+    init_world();
+    window.requestAnimationFrame(gameLoop);
+}
+main();

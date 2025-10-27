@@ -1,7 +1,14 @@
-import { Polyhedron } from "polys/poly";
-import Registry from "registry";
+import { Pyramid } from "./polys/pyramid.mjs";
+import { Cube } from "./polys/cube.mjs";
+import { Polyhedron } from "./polys/poly.mjs";
+import Registry, { RegistryStore } from "./registry.mjs";
 
-export class PolyRegistry extends Registry<Polyhedron> {}
+export class PolyRegistry extends Registry<Polyhedron> {
+    registry: RegistryStore<Polyhedron> = {
+        'cube': new Cube(),
+        'pyramid': new Pyramid(),
+    }
+}
 const PolyRegistryImpl: PolyRegistry = new PolyRegistry();
 export default PolyRegistryImpl;
 

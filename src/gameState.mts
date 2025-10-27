@@ -1,7 +1,7 @@
-import type { GameObject } from "gameObject";
-import { PyramidImpl } from "polys/pyramid";
+import type { GameObject } from "./gameObject.mjs";
+import { PyramidImpl } from "./polys/pyramid.mjs";
 
-interface State { 
+interface State {
     gameOver: boolean
 }
 

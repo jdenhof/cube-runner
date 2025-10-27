@@ -1,14 +1,16 @@
-import { project3D } from "calc";
-import { GameObject } from "gameObject";
-import GameState from "gameState";
-import RenderEngine from "renderEngine";
+import PolyRegistryImpl from "polyRegistry.mjs";
+import { project3D } from "./calc.mjs";
+import { GameObject } from "./gameObject.mjs";
+import GameState from "./gameState.mjs";
+import RenderEngine from "./renderEngine.mjs";
 
 const canvas = document.getElementById("canvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d")!;
 
 function drawObject(obj: GameObject) {
     const poly = RenderEngine.polyRegistry.get(obj.typeId);
-    const rendered = RenderEngine.get(obj.uuid);
+    const rendered = RenderEngine.find(obj.uuid)[0];
+    if (!rendered) return;
     const vertices2d = rendered.vertices.map(project3D);
     const fillStyles = poly.fillStyles ?? [];
     poly.faces.forEach((face, faceIdx) => {

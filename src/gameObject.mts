@@ -1,4 +1,4 @@
-import { type Vector3 } from "calc"
+import { type Vector3 } from "./calc.mjs"
 
 export type GameObject = {
     typeId: string;

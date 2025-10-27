@@ -1,6 +1,6 @@
-import { Vector2, Vector3 } from "calc";
-import { Polyhedron } from "./poly";
-import { GameObject } from "gameObject";
+import { Vector2, Vector3 } from "calc.mjs";
+import { Polyhedron } from "./poly.mjs";
+import { GameObject } from "../gameObject.mjs";
 
 export interface PyramidImpl extends GameObject {
     length: number;
@@ -14,7 +14,7 @@ export class Pyramid extends Polyhedron {
         [0, 1], [0, 2], [0, 3],
         [1, 2], [2, 3], [3, 1]
     ] as Vector2[];
-    
+
     faces = [
         [1, 2, 3],
         [0, 1, 2],
@@ -30,13 +30,13 @@ export class Pyramid extends Polyhedron {
     ]
 
     public create(
-        position = [0, 15, 300] as Vector3,
+        position = [0, 15, 0] as Vector3,
         velocity = [0, 0, 0] as Vector3,
         length = 10,
         height = 8,
         thetaX = 0,
         thetaY = 0
-    ): PyramidImpl { 
+    ): PyramidImpl {
         return {
             typeId: 'pyramid',
             position, thetaX, thetaY,

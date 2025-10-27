@@ -1,5 +1,5 @@
-import { Vector2, Vector3 } from "calc";
-import { GameObject } from "gameObject";
+import { Vector2, Vector3 } from "../calc.mjs";
+import { GameObject } from "../gameObject.mjs";
 
 export interface PolyhedronImpl extends Polyhedron {
     vertices: Vector3[];
